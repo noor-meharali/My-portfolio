@@ -1,0 +1,22 @@
+/* Custom cursor: hide the native pointer on desktop (CustomCursor.tsx
+   renders the replacement dot + ring) and restore it on touch/coarse
+   pointers, where there's no mouse to track. */
+body {
+  cursor: none;
+}
+
+@media (max-width: 768px), (hover: none) {
+  body {
+    cursor: auto;
+  }
+}
+
+@media (min-width: 769px) and (hover: hover) {
+  a,
+  button,
+  [role="button"],
+  input,
+  textarea {
+    cursor: none;
+  }
+}

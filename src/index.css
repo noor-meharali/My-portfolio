@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "./styles/animations.css";
+@import "./styles/cursor.css";
+@import "./styles/scrollbar.css";
+@import "./styles/utilities.css";
+
+/* ---------------------------------------------------------------------- */
+/* Design tokens — "Living Signal"                                        */
+/* Deep indigo-void base, violet -> cyan signal gradient, amber pulse for */
+/* the one warm accent (availability / attention), mono readouts for data */
+/* ---------------------------------------------------------------------- */
+@theme {
+  --color-void: #08090f;
+  --color-void-soft: #0d0f1a;
+  --color-surface: #12141f;
+  --color-ink: #eceefb;
+  --color-muted: #8b8fa8;
+  --color-muted-2: #575b72;
+
+  --color-signal-violet: #7c5cfc;
+  --color-signal-cyan: #22d3ee;
+  --color-signal-amber: #ffb454;
+
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --animate-pulse-slow: pulse-slow 3.5s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-spin-slow: spin 22s linear infinite;
+  --animate-mesh: mesh-move 18s ease-in-out infinite;
+  --animate-marquee: marquee 28s linear infinite;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Base                                                                    */
+/* ---------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  background: var(--color-void);
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-signal-violet) 40%, transparent);
+  color: var(--color-ink);
+}

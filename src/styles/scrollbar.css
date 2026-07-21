@@ -1,0 +1,25 @@
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-signal-violet) transparent;
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-void-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-signal-violet), var(--color-signal-cyan));
+  border-radius: 999px;
+  border: 2px solid var(--color-void-soft);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-signal-cyan), var(--color-signal-violet));
+}

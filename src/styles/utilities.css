@@ -1,0 +1,70 @@
+/* ---------------------------------------------------------------------- */
+/* Reusable utilities                                                      */
+/* ---------------------------------------------------------------------- */
+.glass {
+  background: color-mix(in srgb, white 4%, transparent);
+  border: 1px solid color-mix(in srgb, white 10%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.text-gradient-signal {
+  background: linear-gradient(100deg, var(--color-signal-violet) 10%, var(--color-signal-cyan) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-grid-dots {
+  background-image: radial-gradient(color-mix(in srgb, white 14%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.noise-overlay {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjxmZUNvbG9yTWF0cml4IHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwLjA0IDAiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbikiLz48L3N2Zz4=");
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+.font-mono-tight {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+}
+
+/* Anchor targets clear the fixed navbar when jumped/scrolled to. */
+section[id] {
+  scroll-margin-top: 6.5rem;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Light theme override                                                    */
+/* Toggled by the Navbar theme button via <html data-theme="light">.      */
+/* The signal gradient (violet/cyan/amber) stays constant across themes — */
+/* only the void/ink/muted scale flips, so brand identity holds either way.*/
+/* ---------------------------------------------------------------------- */
+[data-theme="light"] {
+  --color-void: #f5f6fb;
+  --color-void-soft: #eceefb;
+  --color-surface: #ffffff;
+  --color-ink: #12131c;
+  --color-muted: #55596e;
+  --color-muted-2: #82859e;
+}
+
+[data-theme="light"] .glass {
+  background: color-mix(in srgb, black 4%, transparent);
+  border: 1px solid color-mix(in srgb, black 10%, transparent);
+}
+
+[data-theme="light"] .noise-overlay {
+  opacity: 0.25;
+}
+
+[data-theme="light"] .bg-grid-dots {
+  background-image: radial-gradient(color-mix(in srgb, black 12%, transparent) 1px, transparent 1px);
+}
+
+[data-theme="light"] ::selection {
+  background: color-mix(in srgb, var(--color-signal-violet) 25%, transparent);
+  color: var(--color-ink);
+}
