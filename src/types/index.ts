@@ -25,4 +25,13 @@ export interface Profile {
   availability: string;
   resumeHref: string;
   email: string;
+  phone: string;
+  website: string;
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
 }

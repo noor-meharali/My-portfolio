@@ -6,7 +6,7 @@ import {
   RiNodejsFill,
   RiGithubFill,
   RiLinkedinBoxFill,
-  RiTwitterXFill,
+  RiInstagramLine,
 } from "react-icons/ri";
 import { SiTypescript, SiJavascript } from "react-icons/si";
 import { Mail } from "lucide-react";
@@ -22,17 +22,19 @@ export const profile: Profile = {
   tagline: "Building immersive digital experiences with modern web technologies.",
   intro:
     "I design and build fast, expressive web interfaces — where clean architecture meets motion that feels intentional, not decorative.",
-  location: "Pakistan",
+  location: "Islamabad, Pakistan",
   availability: "Available for select projects",
   resumeHref: "/resume/Noor-Ali-Resume.pdf",
-  email: "hello@noorali.dev",
+  email: "nooraliujjan3@gmail.com",
+  phone: "9232 9548 2080",
+  website: "/",
 };
 
 export const socialLinks: SocialLink[] = [
-  { id: "github", label: "GitHub", href: "https://github.com/", icon: RiGithubFill },
-  { id: "linkedin", label: "LinkedIn", href: "https://linkedin.com/", icon: RiLinkedinBoxFill },
-  { id: "twitter", label: "X / Twitter", href: "https://twitter.com/", icon: RiTwitterXFill },
-  { id: "email", label: "Email", href: "mailto:hello@noorali.dev", icon: Mail },
+  { id: "github", label: "GitHub", href: "https://github.com/noor-meharali", icon: RiGithubFill },
+  { id: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/noormehar110", icon: RiLinkedinBoxFill },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/noor_mehar110", icon: RiInstagramLine },
+  { id: "email", label: "Email", href: "mailto:nooraliujjan3@gmail.com", icon: Mail },
 ];
 
 export const techStack: TechItem[] = [
