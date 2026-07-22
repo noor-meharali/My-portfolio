@@ -13,23 +13,6 @@ const NEAR_ENTER_DIST = 170;
 const NEAR_EXIT_DIST = 215;
 const IDLE_TIMEOUT_MS = 8000;
 
-/**
- * A small "Signal" AI-bot fixed in the bottom-right corner. Its antenna
- * tip pulses like the site's other signal-line motifs, tying it visually
- * to the cursor ring / preloader / hero constellation instead of feeling
- * bolted on.
- *
- * Transform ownership is split across three nested layers so GSAP and
- * Framer Motion never fight over the same element's `transform`:
- *   - `wrapperRef` (outer, fixed-position): untouched by either library —
- *     stays the stable reference point for the rAF loop's distance math.
- *   - the Framer `motion.div` inside it: opacity/scale entrance + the
- *     continuous idle float (translateY loop).
- *   - `leanRef` (GSAP-only): scroll lean, celebration pop, idle "stretch".
- * `faceRef` (the SVG head group) is written to directly in the rAF loop
- * for cursor tracking, and briefly handed to GSAP during curious-idle
- * look-around timelines (guarded so the two never write in the same tick).
- */
 export function Mascot() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const leanRef = useRef<HTMLDivElement>(null);
@@ -160,17 +143,14 @@ export function Mascot() {
       });
 
       if (variant === 0) {
-        // look left, then right, settle center — "curious glance"
         tl.to(face, { rotate: -16, x: -5, duration: 0.55, ease: "power2.inOut" })
           .to(face, { rotate: 16, x: 5, duration: 1, ease: "power2.inOut" })
           .to(face, { rotate: 0, x: 0, y: 0, duration: 0.5, ease: "power2.inOut" });
       } else if (variant === 1) {
-        // look up curiously, then settle — "hm, what's that?"
         tl.to(face, { rotate: 8, y: -5, duration: 0.45, ease: "power2.out" })
           .to(face, { rotate: -6, duration: 0.45, ease: "power2.inOut" })
           .to(face, { rotate: 0, y: 0, duration: 0.45, ease: "power2.inOut" });
       } else {
-        // a little stretch/yawn, on the GSAP-owned lean layer
         tl.to(lean, { scaleY: 1.07, scaleX: 0.96, duration: 0.4, ease: "power1.out" }).to(lean, {
           scaleY: 1,
           scaleX: 1,
@@ -277,7 +257,7 @@ export function Mascot() {
           y: reducedMotion ? { duration: 0 } : { delay: 2.4, duration: 5.5, repeat: Infinity, ease: "easeInOut" },
         }}
       >
-        {/* ambient glow, echoes the hero's signal-blob treatment */}
+        {/* ambient glow */}
         <div
           className="absolute inset-[6%] -z-10 rounded-full blur-2xl transition-opacity duration-500"
           style={{
@@ -305,8 +285,7 @@ export function Mascot() {
                 </radialGradient>
               </defs>
 
-              {/* antenna — pulses like the site's signal-line motif */}
-              <line x1="70" y1="36" x2="70" y2="14" stroke="url(#mascot-body)" strokeWidth="2" strokeLinecap="round" />
+              {/* antenna tip (floating light bead above ears) */}
               <motion.circle
                 cx="70"
                 cy="11"
@@ -316,19 +295,39 @@ export function Mascot() {
                 transition={reducedMotion ? {} : { duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
               />
 
-              {/* fins — small side "arms" used for the wave gesture */}
+              {/* side paws / fins — used for the wave gesture */}
               <g ref={leftFinRef} style={{ transformBox: "fill-box", transformOrigin: "100% 30%" }}>
-                <ellipse cx="16" cy="92" rx="9" ry="15" fill="url(#mascot-body)" opacity="0.85" />
+                <path d="M 12 85 C 4 90, 8 105, 20 100 Z" fill="url(#mascot-body)" opacity="0.85" />
               </g>
               <g ref={rightFinRef} style={{ transformBox: "fill-box", transformOrigin: "0% 30%" }}>
-                <ellipse cx="124" cy="92" rx="9" ry="15" fill="url(#mascot-body)" opacity="0.85" />
+                <path d="M 128 85 C 136 90, 132 105, 120 100 Z" fill="url(#mascot-body)" opacity="0.85" />
               </g>
 
-              {/* face — the only group that pans/rotates toward the cursor */}
+              {/* face group — interactive cat head */}
               <g ref={faceRef}>
-                <circle cx="70" cy="80" r="48" fill="url(#mascot-body)" />
-                <circle cx="70" cy="80" r="48" fill="url(#mascot-highlight)" />
-                <circle cx="70" cy="80" r="48" fill="none" stroke="white" strokeOpacity="0.18" strokeWidth="1.5" />
+                {/* cat ears */}
+                <polygon points="28,52 46,18 58,45" fill="url(#mascot-body)" />
+                <polygon points="112,52 94,18 82,45" fill="url(#mascot-body)" />
+                <polygon points="32,50 46,24 54,45" fill="var(--color-signal-violet)" opacity="0.6" />
+                <polygon points="108,50 94,24 86,45" fill="var(--color-signal-violet)" opacity="0.6" />
+
+                {/* cat head base */}
+                <path
+                  d="M 25 78 C 25 48, 115 48, 115 78 C 115 118, 25 118, 25 78 Z"
+                  fill="url(#mascot-body)"
+                />
+                <path
+                  d="M 25 78 C 25 48, 115 48, 115 78 C 115 118, 25 118, 25 78 Z"
+                  fill="url(#mascot-highlight)"
+                />
+
+                {/* whiskers */}
+                <g stroke="white" strokeOpacity="0.3" strokeWidth="1.5" strokeLinecap="round">
+                  <line x1="18" y1="78" x2="38" y2="80" />
+                  <line x1="16" y1="88" x2="38" y2="86" />
+                  <line x1="122" y1="78" x2="102" y2="80" />
+                  <line x1="124" y1="88" x2="102" y2="86" />
+                </g>
 
                 {/* eyes */}
                 <g
@@ -339,12 +338,12 @@ export function Mascot() {
                     transition: "transform 0.09s ease",
                   }}
                 >
-                  <circle cx="53" cy="76" r="11" fill="var(--color-void)" fillOpacity="0.9" />
-                  <circle cx="87" cy="76" r="11" fill="var(--color-void)" fillOpacity="0.9" />
+                  <ellipse cx="51" cy="74" rx="12" ry="10" fill="var(--color-void)" fillOpacity="0.9" />
+                  <ellipse cx="89" cy="74" rx="12" ry="10" fill="var(--color-void)" fillOpacity="0.9" />
                   <circle
                     ref={leftPupilRef}
-                    cx="53"
-                    cy="76"
+                    cx="51"
+                    cy="74"
                     r="5"
                     fill={isHappy ? "var(--color-signal-cyan)" : "white"}
                     style={{
@@ -354,8 +353,8 @@ export function Mascot() {
                   />
                   <circle
                     ref={rightPupilRef}
-                    cx="87"
-                    cy="76"
+                    cx="89"
+                    cy="74"
                     r="5"
                     fill={isHappy ? "var(--color-signal-cyan)" : "white"}
                     style={{
@@ -365,10 +364,13 @@ export function Mascot() {
                   />
                 </g>
 
-                {/* blush — fades in when happy */}
+                {/* tiny cat nose */}
+                <polygon points="68,85 72,85 70,88" fill="white" opacity="0.8" />
+
+                {/* blush */}
                 <circle
                   cx="38"
-                  cy="92"
+                  cy="88"
                   r="6"
                   fill="var(--color-signal-amber)"
                   opacity={isHappy ? 0.35 : 0}
@@ -376,27 +378,27 @@ export function Mascot() {
                 />
                 <circle
                   cx="102"
-                  cy="92"
+                  cy="88"
                   r="6"
                   fill="var(--color-signal-amber)"
                   opacity={isHappy ? 0.35 : 0}
                   style={{ transition: "opacity 0.3s ease" }}
                 />
 
-                {/* mouth — neutral curve cross-fades to a bigger smile */}
+                {/* mouth - cat 'w' smile transition */}
                 <path
-                  d="M 58 100 Q 70 106 82 100"
+                  d="M 64 92 Q 67 96 70 93 Q 73 96 76 92"
                   stroke="white"
-                  strokeWidth="3"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   fill="none"
                   opacity={isHappy ? 0 : 0.85}
                   style={{ transition: "opacity 0.25s ease" }}
                 />
                 <path
-                  d="M 54 98 Q 70 114 86 98"
+                  d="M 62 91 Q 66 98 70 94 Q 74 98 78 91"
                   stroke="white"
-                  strokeWidth="3.5"
+                  strokeWidth="3"
                   strokeLinecap="round"
                   fill="none"
                   opacity={isHappy ? 0.95 : 0}

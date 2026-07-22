@@ -123,7 +123,7 @@ export function Hero({ onIntroComplete }: HeroProps) {
             <MagneticButton href="#projects" variant="primary">
               <FolderGit2 className="h-4 w-4" /> View Projects
             </MagneticButton>
-            <MagneticButton href={profile.resumeHref} variant="ghost" download target="_blank">
+            <MagneticButton href={"/Noor_Ali_Resume.pdf"} variant="ghost" download target="_blank">
               <Download className="h-4 w-4" /> Download Resume
             </MagneticButton>
             <MagneticButton href="#contact" variant="ghost">
