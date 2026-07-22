@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Loader } from "@/components/loaders/Loader";
-import { CustomCursor } from "@/components/cursor/CustomCursor";
+import { Cursor } from "@/components/cursor/Cursor";
 import { GradientBackground } from "@/components/effects/GradientBackground";
 import { ParticlesBackground } from "@/components/effects/ParticlesBackground";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/hero/Hero";
+import { Mascot } from "@/components/mascot/Mascot";
 
 // Vite SPA equivalent of Next's app/layout.tsx: this is the single root
 // tree, so "{children}" is just whatever section components sit inside
@@ -16,15 +17,23 @@ import { Hero } from "@/components/hero/Hero";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
+  const handleLoaderComplete = () => {
+    setIsLoading(false);
+    // Lets the mascot play its tiny celebration once the page is ready;
+    // any future route/section transition can dispatch the same event.
+    window.dispatchEvent(new Event("mascot:celebrate"));
+  };
+
   return (
     <>
-      <AnimatePresence>{isLoading && <Loader onComplete={() => setIsLoading(false)} />}</AnimatePresence>
+      <AnimatePresence>{isLoading && <Loader onComplete={handleLoaderComplete} />}</AnimatePresence>
 
-      <CustomCursor />
+      <Cursor />
       <GradientBackground />
       <ParticlesBackground />
 
       <Navbar visible={!isLoading} />
+      <Mascot />
 
       <main>
         <Hero />

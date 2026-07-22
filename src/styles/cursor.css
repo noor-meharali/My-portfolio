@@ -1,4 +1,4 @@
-/* Custom cursor: hide the native pointer on desktop (CustomCursor.tsx
+/* Custom cursor: hide the native pointer on desktop (Cursor.tsx + CursorGlow.tsx
    renders the replacement dot + ring) and restore it on touch/coarse
    pointers, where there's no mouse to track. */
 body {
