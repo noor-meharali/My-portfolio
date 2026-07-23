@@ -40,7 +40,7 @@ export function ProfileCard() {
     rotateYRaw.set(0);
   };
 
-  const initials = aboutInfo.name
+  const initials = profile.name
     .split(" ")
     .map((w) => w[0])
     .join("");
@@ -101,19 +101,19 @@ export function ProfileCard() {
           ) : (
             <img
               src={profile.portrait}
-              alt={`Portrait of ${aboutInfo.name}`}
+              alt={`Portrait of ${profile.name}`}
               className="h-full w-full object-cover"
               onError={() => setImgFailed(true)}
             />
           )}
         </div>
 
-        <h3 className="font-display text-xl font-semibold text-ink">{aboutInfo.name}</h3>
-        <p className="mt-1 font-mono-tight text-xs text-signal-cyan uppercase">{aboutInfo.role}</p>
+        <h3 className="font-display text-xl font-semibold text-ink">{profile.name}</h3>
+        <p className="mt-1 font-mono-tight text-xs text-signal-cyan uppercase">{profile.role}</p>
 
         <p className="mt-3 flex items-center justify-center gap-1.5 text-sm text-muted">
           <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-          {aboutInfo.location}
+          {profile.location}
         </p>
 
         <div className="mt-5 flex justify-center">

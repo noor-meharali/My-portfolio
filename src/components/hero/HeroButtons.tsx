@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Download, FolderGit2, MessageSquare } from "lucide-react";
-import { socialLinks } from "@/data/profile";
+import { profile, socialLinks } from "@/data/profile";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 
 /**
@@ -20,7 +20,7 @@ export function HeroButtons() {
         <MagneticButton href="#projects" variant="primary">
           <FolderGit2 className="h-4 w-4" /> View Projects
         </MagneticButton>
-        <MagneticButton href="/Noor_Ali_Resume.pdf" variant="ghost" download target="_blank">
+        <MagneticButton href={profile.resumeHref} variant="ghost" download target="_blank">
           <Download className="h-4 w-4" /> Download Resume
         </MagneticButton>
         <MagneticButton href="#contact" variant="ghost">

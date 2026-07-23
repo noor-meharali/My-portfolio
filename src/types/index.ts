@@ -27,6 +27,7 @@ export interface Profile {
   email: string;
   phone: string;
   website: string;
+  portrait: string;
 }
 
 export interface Project {

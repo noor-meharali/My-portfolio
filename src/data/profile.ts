@@ -24,10 +24,11 @@ export const profile: Profile = {
     "I design and build fast, expressive web interfaces — where clean architecture meets motion that feels intentional, not decorative.",
   location: "Islamabad, Pakistan",
   availability: "Available for select projects",
-  resumeHref: "/resume/Noor-Ali-Resume.pdf",
+  resumeHref: "/assets/docs/Noor_Ali_Resume.pdf",
   email: "nooraliujjan3@gmail.com",
   phone: "9232 9548 2080",
   website: "/",
+  portrait: "/assets/images/profile/profile.jpg",
 };
 
 export const socialLinks: SocialLink[] = [

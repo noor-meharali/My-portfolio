@@ -9,12 +9,7 @@ export interface PhilosophyPoint {
 }
 
 export interface AboutInfo {
-  name: string;
-  role: string;
-  location: string;
-  photoSrc: string;
   availability: string;
-  startedLabel: string;
   introduction: string[];
   interests: string[];
   experienceTitle: string;
@@ -26,14 +21,11 @@ export interface AboutInfo {
 }
 
 // Everything the About section's copy is built from — edit here, not in
-// the components, so the section stays data-driven.
+// the components, so the section stays data-driven. Identity fields
+// (name, role, location, portrait) live in data/profile.ts — this file
+// only holds About-specific content, so there's one source of truth.
 export const aboutInfo: AboutInfo = {
-  name: "Noor Ali",
-  role: "Front-End Developer",
-  location: "Islamabad, Pakistan",
-  photoSrc: "/images/profile/noor-ali.jpg",
   availability: "Available for Opportunities",
-  startedLabel: "Building for the web since May 2025",
   introduction: [
     "I'm Noor Ali, a front-end developer based in Islamabad, Pakistan. I started building for the web in May 2025, and what began as curiosity quickly turned into a genuine passion for writing code and solving problems through software.",
     "My focus is on building interfaces that feel fast, considered, and alive — clean architecture on the inside, motion and detail on the outside. I care about UI engineering, thoughtful animation, performance, and interfaces that hold up on any device.",
