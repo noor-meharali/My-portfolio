@@ -11,9 +11,10 @@ interface Particle {
 /**
  * Lightweight canvas particle field: soft floating dots that drift and
  * very gently steer away from the cursor, giving the page ambient life
- * without the cost of a full physics/3D particle system.
+ * without the cost of a full physics/3D particle system. Renders as an
+ * absolutely-positioned layer inside Background's fixed container.
  */
-export function ParticlesBackground({ density = 55 }: { density?: number }) {
+export function Particles({ density = 55 }: { density?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
 
@@ -93,11 +94,5 @@ export function ParticlesBackground({ density = 55 }: { density?: number }) {
     };
   }, [density]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="pointer-events-none fixed inset-0 -z-10 opacity-70"
-      aria-hidden="true"
-    />
-  );
+  return <canvas ref={canvasRef} className="absolute inset-0 opacity-70" aria-hidden="true" />;
 }

@@ -2,11 +2,11 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Loader } from "@/components/loaders/Loader";
 import { Cursor } from "@/components/cursor/Cursor";
-import { GradientBackground } from "@/components/effects/GradientBackground";
-import { ParticlesBackground } from "@/components/effects/ParticlesBackground";
+import { Background } from "@/components/effects/Background";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/hero/Hero";
+import { About } from "@/components/about/About";
 import { Mascot } from "@/components/mascot/Mascot";
 
 // Vite SPA equivalent of Next's app/layout.tsx: this is the single root
@@ -29,14 +29,14 @@ function App() {
       <AnimatePresence>{isLoading && <Loader onComplete={handleLoaderComplete} />}</AnimatePresence>
 
       <Cursor />
-      <GradientBackground />
-      <ParticlesBackground />
+      <Background />
 
       <Navbar visible={!isLoading} />
       <Mascot />
 
       <main>
         <Hero />
+        <About />
       </main>
 
       <Footer />
